@@ -1,0 +1,4 @@
+{
+    "command": "npm install",
+    "working_directory": "/home/kavia/workspace/code-generation/metrics-dashboard-7af3b7de/kavia_frontend"
+}
