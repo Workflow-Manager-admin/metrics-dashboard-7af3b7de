@@ -9,6 +9,15 @@ This project provides a minimal React template with a clean, modern UI and minim
 - **Fast**: Minimal dependencies for quick loading times
 - **Simple**: Easy to understand and modify
 
+## Backend API URL Setup
+
+This app requires the backend API URL to be set via the `REACT_APP_BACKEND_URL` environment variable.  
+To use a custom backend URL (such as when running locally or in production), create a `.env` file in this folder (see `.env.example`), e.g.:
+
+```
+REACT_APP_BACKEND_URL=http://localhost:3001
+```
+
 ## Getting Started
 
 In the project directory, you can run:

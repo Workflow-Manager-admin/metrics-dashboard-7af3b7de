@@ -37,13 +37,18 @@ function MetricsDashboard({ theme }) {
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 10;
 
-  // Fetch metrics from backend
+  // Fetch metrics from backend using env var for base URL
   useEffect(() => {
     setLoading(true);
     setFetchError(null);
-    fetch("http://localhost:3001/metrics")
+    // Use REACT_APP_BACKEND_URL environment variable for base URL
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
+    // Avoid trailing slashes for consistency
+    let url = backendUrl.replace(/\/+$/, "") + "/metrics";
+
+    fetch(url)
       .then((res) => {
-        if (!res.ok) throw new Error("Error fetching metrics");
+        if (!res.ok) throw new Error(`Error fetching metrics (${res.status})`);
         return res.json();
       })
       .then((data) => {
@@ -51,7 +56,7 @@ function MetricsDashboard({ theme }) {
         setLoading(false);
       })
       .catch((err) => {
-        setFetchError(err.message);
+        setFetchError(`Failed to load metrics: ${err.message}`);
         setLoading(false);
       });
   }, []);
@@ -210,7 +215,7 @@ function MetricsDashboard({ theme }) {
         marginBottom: 12,
         letterSpacing: 0.05,
       }}>
-        Kavia Metrics Dashboard
+        Kavia Metrics Dashboard1
       </h1>
       {/* Summary Stats */}
       <section style={{
